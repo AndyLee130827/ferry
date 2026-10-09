@@ -1,0 +1,58 @@
+{
+  "name": "ferry",
+  "productName": "Ferry",
+  "version": "1.0.0",
+  "description": "A clean SSH/SFTP file ferry between your Mac and your servers",
+  "main": "electron/main.js",
+  "author": "andy-lee",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "dist": "electron-builder --mac --arm64 -c.directories.output=\"$HOME/Ferry-release\"",
+    "test": "electron test/e2e.js",
+    "dist:x64": "electron-builder --mac --x64 -c.directories.output=\"$HOME/Ferry-release\""
+  },
+  "dependencies": {
+    "ssh2": "^1.15.0"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "dev.andylee.ferry",
+    "productName": "Ferry",
+    "files": [
+      "electron/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json",
+      "!node_modules/cpu-features/**"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.icns",
+      "identity": null
+    },
+    "directories": {
+      "output": "release"
+    },
+    "npmRebuild": false
+  }
+}
